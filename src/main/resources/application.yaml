@@ -1,0 +1,7 @@
+spring:
+  security:
+    user:
+      name: devyank
+      password: 12345
+server:
+  port: 8081
