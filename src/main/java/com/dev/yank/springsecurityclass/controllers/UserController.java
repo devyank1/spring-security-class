@@ -21,21 +21,24 @@ public class UserController {
         this.encoder = encoder;
     }
 
-    @PostMapping("/register") // endpoint to register an user
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Customer customer) {
-
         try {
-            String hashPassword = encoder.encode(customer.getPassword()); // hash the password collected
-            customer.setPassword(hashPassword);
-            Customer savedCustomer = customerRepository.save(customer); // saves a new password
+            String hashPwd = encoder.encode(customer.getPassword());
+            customer.setPassword(hashPwd);
+            Customer savedCustomer = customerRepository.save(customer);
 
-            if (savedCustomer.getId() > 0 ) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("Given user details are successfully registered.");
+            if(savedCustomer.getId()>0) {
+                return ResponseEntity.status(HttpStatus.CREATED).
+                        body("Given user details are successfully registered");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User registration failed.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                        body("User registration failed");
             }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An exception ocurred: " + e.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
+                    body("An exception occurred: " + ex.getMessage());
         }
+
     }
 }
