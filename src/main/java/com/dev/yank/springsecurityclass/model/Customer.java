@@ -45,4 +45,14 @@ public class Customer {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Customer(Long id, String email, String password, String role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Customer() {
+    }
 }
